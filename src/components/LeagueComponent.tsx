@@ -11,12 +11,6 @@ export function LeagueComponent() {
     let [errMsg, setErrMsg] = useState('');
     const [count, setcount] = useState(0);
 
-    useEffect(() => {
-        document.title = `you clicked ${count} times`;
-        //document.getElementById("display") = 'you clicked ${count} times'
-    });
-    
-
     let leagues = async () => {
         try{
             let leagues = await getLeagues();
@@ -40,9 +34,7 @@ export function LeagueComponent() {
         {/* <p>counting: {count}</p> */}
         {/* <h3 id="display"> {} </h3> */}
         <h3 id="display"> Example count {count} </h3>
-
         <button onClick={leagues}>display leagues</button>
-        <button onClick={() => (count+1)}>useEffect test: increase count </button>
 
     </div>
     </>
