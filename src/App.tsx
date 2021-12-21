@@ -12,8 +12,7 @@ import PriceComponent from './components/PriceComponent';
 import NavComponent from './components/NavbarComponent';
 import {RegistrationComp} from './components/RegistrationComponent';
 import { League } from './models/League';
-import { LeagueComponent } from './components/LeagueComponent';
-import LeaguesList from './components/LeaguesContainer';
+import LeaguesList from './containers/LeaguesContainer';
 
 function App() {
 
