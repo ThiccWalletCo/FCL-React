@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import { Link, Navigate } from "react-router-dom";
 
 import League from "../components/LeagueComponent";
 import { getLeagues } from '../remote/league-service';
@@ -15,14 +16,34 @@ export default function LeaguesList() {
 
     return (<>
         <h1><u>LEAGUES</u></h1>
-        <ul>
+        {/* <ul>
             {leagueList.map(league => {
                 return (
                     <League league={league} key={JSON.stringify(league["leagueName"])} />
                 )
               
             })}
-        </ul>
+        </ul> */}
+        <table className="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Creator</th>
+                    <th>Initial Balance</th>
+                    <th> Action </th>
+                 </tr>
+            </thead>
+            <tbody>
+                {leagueList && leagueList.map(league =>
+                    <tr key={league["leagueName"]}>
+                        <td><Link to={league['leagueName']}> {league["leagueName"]}</Link></td>
+                        <td>{league["creatorName"]}</td>
+                        <td>{league["initialBal"]}</td>
+                        <td><Link to={league['leagueName']}> Join </Link></td>
+                    </tr>
+                    )}
+            </tbody>
+        </table>
     </>)
 }
 
