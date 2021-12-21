@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 
-// import League from "./League";
+import League from "../components/LeagueComponent";
 import { getLeagues } from '../remote/league-service';
 
 export default function LeaguesList() {
@@ -26,11 +26,11 @@ export default function LeaguesList() {
     </>)
 }
 
-function League(league: any) {
-    return (<>
-        <li>
-            {console.log(JSON.stringify(league["league"]["leagueName"]))}
-            {(league["league"]["leagueName"]) + " League"}
-        </li>
-    </>)
-}
+// function League(league: any) {
+//     return (<>
+//         <li>
+//             {console.log(JSON.stringify(league["league"]["leagueName"]))}
+//             {(league["league"]["leagueName"]) + " League"}
+//         </li>
+//     </>)
+// }

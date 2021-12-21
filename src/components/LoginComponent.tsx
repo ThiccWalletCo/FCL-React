@@ -41,7 +41,7 @@ export function LoginComponent(props: ILoginProps) {
     }
 
     return (
-        props.currentUser ? <Navigate to="/dashboard"/>:
+        props.currentUser ? <Navigate to="/leagues"/>:
         <>
             <h4>Log in to your account</h4>
             <div>
