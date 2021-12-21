@@ -10,6 +10,7 @@ import {Principal} from './models/Principal';
 import { DashboardComponent } from './components/DashboardComponent';
 import PriceComponent from './components/PriceComponent';
 import NavComponent from './components/NavbarComponent';
+import {RegistrationComp} from './components/RegistrationComponent';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
           <Route path="/dashboard" element={<DashboardComponent currentUser={authUser}/>}/>
           <Route path="/price" element={<PriceComponent/>}/>
+          <Route path="/register" element={<RegistrationComp/>}/>
       </Routes>
 
     </div>
