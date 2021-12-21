@@ -13,6 +13,7 @@ import NavComponent from './components/NavbarComponent';
 import {RegistrationComp} from './components/RegistrationComponent';
 import { League } from './models/League';
 import { LeagueComponent } from './components/LeagueComponent';
+import LeaguesList from './components/LeaguesList';
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
           <Route path="/login" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
           <Route path="/dashboard" element={<DashboardComponent currentUser={authUser}/>}/>
           <Route path="/price" element={<PriceComponent/>}/>
-          <Route path="/leagues" element={<LeagueComponent/>}/>
+          <Route path="/leagues" element={<LeaguesList/>}/>
           <Route path="/register" element={<RegistrationComp/>}/>
       </Routes>
 
