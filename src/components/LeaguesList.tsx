@@ -8,7 +8,7 @@ export default function LeaguesList() {
 
     let leagues = getLeagues().then(leagues => {
         updateLeagueList(leagues);
-        console.log(leagues);
+        console.log(leagueList);
 
     })
 
@@ -16,8 +16,11 @@ export default function LeaguesList() {
         <h1><u>LEAGUES</u></h1>
         <ul>
             {leagueList.map(league => {
-                console.log(league.leagueName);
-                <League leagueName={league} key={league} />
+                console.log("test");
+                return (
+                    <League league={league} key={league} />
+                )
+              
             })}
         </ul>
     </>)
