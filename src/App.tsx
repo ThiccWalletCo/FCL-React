@@ -10,7 +10,7 @@ import {Principal} from './models/Principal';
 import { DashboardComponent } from './components/DashboardComponent';
 import PriceComponent from './components/PriceComponent';
 import NavComponent from './components/NavbarComponent';
-import RegistrationComp from './components/RegistrationComponent';
+import {RegistrationComp} from './components/RegistrationComponent';
 
 function App() {
 
