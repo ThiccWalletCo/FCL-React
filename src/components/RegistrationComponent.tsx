@@ -1,8 +1,7 @@
-import { Component, Fragment } from 'react';
-import { Form, FormControl, Button, Container } from 'react-bootstrap';
+import { Fragment } from 'react';
+import { Form, Button, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import React, { SyntheticEvent, useState } from 'react';
-import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 
 import { CreateUserRequest } from '../models/CreateUserRequest';
@@ -51,7 +50,7 @@ export function RegistrationComp() {
 
     function checkEmailAvailability() {
         if (email) {
-            let taken = requestParamQuery(`/user/email?email=`, email).then((bool) => {
+            requestParamQuery(`/user/email?email=`, email).then((bool) => {
                 displayEmailTaken(bool);
             });
         }
@@ -69,7 +68,7 @@ export function RegistrationComp() {
     //----------------------------------------
 
     function sendRegistrationRequest() {
-        if(!usernameTaken && !emailTaken && !nonmatchingPassword && !(username == '') && !(email == '') && !(firstPassword == '')) {
+        if(!usernameTaken && !emailTaken && !nonmatchingPassword && !(username === '') && !(email === '') && !(firstPassword === '')) {
             let reqBody: CreateUserRequest = new CreateUserRequest(username, email, firstPassword);
 
             createUser(reqBody).then((bool) => {
@@ -91,14 +90,14 @@ export function RegistrationComp() {
                 <Form.Control type="text" placeholder="Username" onChange={changeUsername} onBlur={checkUsernameAvailability}/> 
             </Form.Group>
 
-            {usernameTaken && <div className="alert alert-primary" id="nonMatchingPasswordAlert">Username is already in use!</div>}
+            {usernameTaken && <div className="alert alert-danger" id="nonMatchingPasswordAlert">Username is already in use!</div>}
 
             <Form.Group>
                 <Form.Label>Email:</Form.Label>
                 <Form.Control type="email" placeholder="Enter email" onChange={changeEmail} onBlur={checkEmailAvailability}/>
             </Form.Group>
 
-            {emailTaken && <div className="alert alert-primary" id="nonMatchingPasswordAlert">E-Mail is already in use!</div>}
+            {emailTaken && <div className="alert alert-danger" id="nonMatchingPasswordAlert">E-Mail is already in use!</div>}
 
             <Form.Group className="mb-3" id="firstPassword">
                 <Form.Label>Password:</Form.Label>
@@ -110,7 +109,7 @@ export function RegistrationComp() {
                 <Form.Control type="password" placeholder="Confirm Password" onChange={changeSecondPassword} onBlur={checkPasswordMatch}/>
             </Form.Group>
 
-            {nonmatchingPassword && <div className="alert alert-primary" id="nonMatchingPasswordAlert">Passwords must match!</div>}
+            {nonmatchingPassword && <div className="alert alert-danger" id="nonMatchingPasswordAlert">Passwords must match!</div>}
 
             <Button variant="primary" type="submit" onClick={sendRegistrationRequest}>
                 Submit

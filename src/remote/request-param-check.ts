@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { appClient } from "./app-client"
 
 export const requestParamQuery = async (path: string, value: string):Promise<boolean> => {
