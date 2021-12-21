@@ -8,7 +8,7 @@ interface IDashboardProps{
 
 export function DashboardComponent(props: IDashboardProps){
     return(
-        !props.currentUser ? <Navigate to="/login"/>: <Navigate to="/price"/>
-        // <h1>You are now logged in as {props.currentUser.username}</h1>
+        !props.currentUser ? <Navigate to="/login"/>: //<Navigate to="/price"/>
+        <h1>You are now logged in as {props.currentUser.username}</h1>
     );
 }
