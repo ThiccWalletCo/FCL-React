@@ -1,8 +1,8 @@
 function League(league) {
     return (<>
         <li>
-            <p>fdfsdfsdf</p>Bottom Text
-            {league.leagueName}
+            {console.log(JSON.stringify(league["league"]["leagueName"]))}
+            {(league["league"]["leagueName"]) + " League"}
         </li>
     </>)
 }

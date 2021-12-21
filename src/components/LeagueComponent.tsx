@@ -33,6 +33,7 @@ export function LeagueComponent() {
     <div>
         {/* <p>counting: {count}</p> */}
         {/* <h3 id="display"> {} </h3> */}
+        
         <h3 id="display"> Example count {count} </h3>
         <button onClick={leagues}>display leagues</button>
 
