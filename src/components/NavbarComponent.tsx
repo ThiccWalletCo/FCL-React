@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default class NavbarComp extends Component {
@@ -20,6 +21,7 @@ export default class NavbarComp extends Component {
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="#action/3.4">Create New League</NavDropdown.Item>
                     </NavDropdown>
+                    <Nav.Link as={Link} to="/login">DELETE THIS TEST</Nav.Link>
                     </Nav>
 
                     <Nav className="container-fluid">
