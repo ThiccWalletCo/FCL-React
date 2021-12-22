@@ -30,8 +30,12 @@ export function LoginComponent(props: ILoginProps) {
 
     let login = async () => {
         try{
-            let principal = await authenticate({username, password});
-            props.setCurrentUser(principal);
+            let principal = await authenticate({username, password}).then((resp) => {
+                console.log(resp.headers["authorization"]);
+                localStorage.setItem("fcl-auth-token", resp.headers["authorization"]);
+                props.setCurrentUser(resp.data);
+            });
+            
             console.log(principal);
         } catch (e: any) {
             //setVisible('showing');
@@ -41,7 +45,7 @@ export function LoginComponent(props: ILoginProps) {
     }
 
     return (
-        props.currentUser ? <Navigate to="/dashboard"/>:
+        props.currentUser ? <Navigate to="/leagues"/>:
         <>
             <h4>Log in to your account</h4>
             <div>
