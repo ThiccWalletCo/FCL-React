@@ -1,10 +1,10 @@
 export class CreateLeagueRequest {
-    leagueName:string;
-    initialBal:number;
+    name:string;
+    initialBalance:number;
 
     constructor(leagueName:string, initialBalance:number){
-        this.leagueName = leagueName;
-        this.initialBal = initialBalance;
+        this.name = leagueName;
+        this.initialBalance = initialBalance;
     }
 
 }
