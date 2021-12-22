@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default class NavbarComp extends Component {
-
+    
     render() {
         return (
             <>
@@ -32,7 +32,7 @@ export default class NavbarComp extends Component {
                     {!doesTokenExist() && <Nav.Link as={Link} to="/register">Register</Nav.Link>}
                     {/* If user is not logged in, display the above. If they are, display the below */}
                     {/* doesTokenExist() && <Nav.Link href="/user">My Account</Nav.Link> */}
-                    {doesTokenExist() && <Nav.Link onClick={logout} as={Link} to="/">Log Out</Nav.Link>}
+                    {doesTokenExist() && <Nav.Link onClick={logout} href="/">Log Out</Nav.Link>}
                     </Nav>
                 </Navbar.Collapse>
                 </Container>
@@ -59,5 +59,4 @@ function doesTokenExist() {
 
 let logout = () => {
     localStorage.removeItem("fcl-auth-token");
-
 }
