@@ -10,21 +10,6 @@ export default function createAuthClient() {
         token = "";
     }
 
-    // const appClient = axios.get("http://api.fantasycoinleague.club").then( res => {
-    //     if (res.data === "success") {
-            
-    //     }
-    // })
-        
-    //     {
-    //     baseURL: 'http://api.fantasycoinleague.club',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'Authorization': token
-    //     }
-    // });
-
-
     const appClient = axios.create({
         baseURL: 'http://api.fantasycoinleague.club',
         headers: {
