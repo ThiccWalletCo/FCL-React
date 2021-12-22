@@ -1,12 +1,11 @@
 import {useState, useEffect} from "react";
 import { Link, Navigate } from "react-router-dom";
-import { League } from '../models/League'; 
-//import LeagueComponent from "../components/LeagueComponent";
+
+import League from "../components/LeagueComponent";
 import { getLeagues } from '../remote/league-service';
 import { reqParamQuery } from "../remote/request-param-data";
 
-
-export default function LeaderboardList(league:League | undefined) {
+export default function CoinList() {
     let [playerList, updatePlayerList] = useState([]);
     
     useEffect( () => {
@@ -60,4 +59,4 @@ export default function LeaderboardList(league:League | undefined) {
 //         </li>
 //     </>)
 // }
-export {}
+//export {}

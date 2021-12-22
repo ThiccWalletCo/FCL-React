@@ -16,6 +16,8 @@ import {RegistrationComp} from './components/RegistrationComponent';
 import { League } from './models/League';
 import LeaguesList from './containers/LeaguesContainer';
 import LeaderboardList from './components/LeaderboardComponent';
+import CoinList from './components/PlayerWalletComponent';
+
 
 function App() {
 
@@ -32,6 +34,9 @@ function App() {
           {/* {heroes.map(hero => (<Link to={'heroes/' + hero.id} />)} */}
 
           <Route path="leagues/d" element={<LeaderboardList/>}/>
+          <Route path="leagues/d/HappyPonyExplosions3" element={<CoinList/>}/>
+
+
 
           <Route path="/login" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
           <Route path="/dashboard" element={<DashboardComponent currentUser={authUser}/>}/>
