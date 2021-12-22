@@ -4,14 +4,18 @@ import { Link, Navigate } from "react-router-dom";
 import League from "../components/LeagueComponent";
 import { getLeagues } from '../remote/league-service';
 
-export default function LeaguesList() {
+export default function LeaguesList({setLeague}:any) {
     let [leagueList, updateLeagueList] = useState([]);
+
+    function updateCurrLeague(e:any){
+        console.log( e.target.innerText);
+        setLeague(e.target.innerText);
+    }
     
     useEffect( () => {
         getLeagues().then((leagues) => {
             if (leagueList.length == 0) updateLeagueList(leagues);
         });
-       
     });
 
     return (<>
@@ -36,10 +40,11 @@ export default function LeaguesList() {
             <tbody>
                 {leagueList && leagueList.map(league =>
                     <tr key={league["leagueName"]}>
-                        <td><Link to={league['leagueName']}> {league["leagueName"]}</Link></td>
+                        {/* <td><Link to={league['leagueName']} onClick={updateCurrLeague}> {league["leagueName"]}</Link></td> */}
+                        <td><Link to={'/leaderboard'} onClick={updateCurrLeague}> {league["leagueName"]}</Link></td>
                         <td>{league["creatorName"]}</td>
                         <td>{league["initialBal"]}</td>
-                        <td><Link to={league['leagueName']}> Join </Link></td>
+                        <td><Link to={league['leagueName']} onClick={updateCurrLeague}> Join </Link></td>
                     </tr>
                     )}
             </tbody>
