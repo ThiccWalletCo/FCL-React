@@ -44,8 +44,22 @@ export function LoginComponent(props: ILoginProps) {
         //console.log(username, password);
     }
 
+    function doesTokenExist() {
+        let token:any;
+    
+        if (localStorage.getItem("fcl-auth-token")) {
+            token = localStorage.getItem("fcl-auth-token");
+        }
+        else {
+            token = "";
+        }
+    
+        return !!token;
+    
+    }
+
     return (
-        props.currentUser ? <Navigate to="/leagues"/>:
+        doesTokenExist() ? <Navigate to="/leagues"/>:
         <>
             <h4>Log in to your account</h4>
             <div>
