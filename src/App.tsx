@@ -46,7 +46,7 @@ function App() {
           <Route path="/createLeague" element={<CreateLeagueComponent/>} />
           <Route path="/my_leagues" element={<MyLeaguesComponent currentUser={authUser} setLeague={setCurrLeague} />} />
           <Route path="/leaderboard" element={<LeaderboardList leagueName={currLeague} setCurrWallet={setAuthWallet}/>}/>
-          <Route path="/wallet" element={<WalletContents currWallet={authWallet} /> } /> 
+          <Route path="/wallet" element={<WalletContents currWallet={authWallet} currUser={authUser}/> } /> 
           {/* <Route path="/leaderboard" element={<LeaderboardList/>}/> */}
           {/* {LeaguesList.map(league => (<Link to={'leagues/'+ league.leagueName} />))} */}
       </Routes>
