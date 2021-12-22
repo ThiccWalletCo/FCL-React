@@ -32,7 +32,7 @@ export function LoginComponent(props: ILoginProps) {
         try{
             let principal = await authenticate({username, password}).then((resp) => {
                 console.log(resp.headers["authorization"]);
-            
+                localStorage.setItem("fcl-auth-token", resp.headers["authorization"]);
                 props.setCurrentUser(resp.data);
             });
             

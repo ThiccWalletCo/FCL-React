@@ -13,6 +13,7 @@ import { DashboardComponent } from './components/DashboardComponent';
 import PriceComponent from './components/PriceComponent';
 import NavComponent from './components/NavbarComponent';
 import {RegistrationComp} from './components/RegistrationComponent';
+import { CreateLeagueComponent } from './components/CreateLeagueComponent'
 import { League } from './models/League';
 import LeaguesList from './containers/LeaguesContainer';
 import LeaderboardList from './components/LeaderboardComponent';
@@ -38,6 +39,7 @@ function App() {
           <Route path="/price" element={<PriceComponent/>}/>
           <Route path="/leagues" element={<LeaguesList/>}/>
           <Route path="/register" element={<RegistrationComp/>}/>
+          <Route path="/createLeague" element={<CreateLeagueComponent/>} />
           {/* <Route path="/leaderboard" element={<LeaderboardList/>}/> */}
           {/* {LeaguesList.map(league => (<Link to={'leagues/'+ league.leagueName} />))} */}
       </Routes>
