@@ -35,6 +35,7 @@ function App() {
           <Route path="/leaderboard" element={<LeaderboardList leagueName={currLeague}/>}/>
 
           <Route path="/" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
+          <Route path="/login" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
           <Route path="/dashboard" element={<DashboardComponent currentUser={authUser}/>}/>
           <Route path="/price" element={<PriceComponent/>}/>
           <Route path="/leagues" element={<LeaguesList setLeague={setCurrLeague}/>}/>
