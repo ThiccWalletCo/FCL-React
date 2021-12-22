@@ -3,12 +3,7 @@ import { appClient } from "./app-client"
 
 export const getWallet =async (req:WalletRequest) => {
 
-    console.log('((((((((((((((');
-    console.log(req);
-
     let resp = await appClient.post('/wallet/get', req);
-
-    console.log(resp);
 
     if(resp.status==500){
         throw resp.data;

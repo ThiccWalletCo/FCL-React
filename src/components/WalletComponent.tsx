@@ -14,11 +14,11 @@ interface IWalletProps{
 }
 
 export default function WalletContents(props:IWalletProps) {
-    let [currWallet, updateCurrWallet] = useState([]);
+    let [currWallet, updateCurrWallet] = useState({});
     let [coinList, updateCoinList] = useState([]);
 
-    // let pairs:string[] = ['BTC-USD', 'USDT-USD', 'SHIB-USD', 'ADA-USD', 'RGT-USD', 'DOGE-USD']; 
-    // let amounts:number[] = [0.001, 200, 4000000, 300, 15, 1000];
+    let pairs:string[] = []; 
+    let amounts:number[] = [];
     let numIterations:number = 1500;
 
     //var userWallet;
@@ -30,27 +30,24 @@ export default function WalletContents(props:IWalletProps) {
 
         if (props.currWallet){
             getWallet(props.currWallet as WalletRequest).then((wallet)=> {
-            if(currWallet == undefined){
-                updateCurrWallet(wallet);
-                console.log("++++++++++++fsdfsdfsdfsdffs$#%^%#$^&#%$%#$+++++++++++++++++++");
-                console.log(wallet);
-                console.log(wallet['coins']);
-                console.log("@@#@$@#$%%@%$#$#%#$%#$%");
-                updateCoinList(wallet['coins']);
+            if(coinList.length == 0){
+                // updateCurrWallet(wallet); // doesn't update currwallet
+                // updateCoinList(wallet['coins']);
+                currWallet = wallet;
+                coinList = wallet['coins'];
                 
-            } 
+            }
+            
+            pairs = coinList.map( coin => coin['currPair']);
+            amounts = coinList.map( coin => coin['amount']);
+            console.log(pairs);
+            console.log(amounts);
         })
 
            
         }
        
     }, []);
-
-    console.log("+++++++++++++++++++++++++++++++");
-    // console.log(walletList);
-    
-    let pairs:string[] = [];
-    let amounts:number[] = [];
 
     // for(let i in walletList){
     //     pairs.push(i);
@@ -230,11 +227,11 @@ export default function WalletContents(props:IWalletProps) {
             </tbody>
         </table>
         
-        {/* <div className="App">
+        <div className="App">
             {(props.currUser?.username == props.currWallet?.username) && <TransactionComponent/>}
             <h3>Coins in Wallet:</h3>
             <div id="display"></div>
-        </div> */}
+        </div>
         </>
         );
 }    
