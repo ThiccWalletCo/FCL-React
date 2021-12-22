@@ -15,7 +15,7 @@ export const authenticate = async(credentials: {username: string, password: stri
         //TODO: refactor backend to return principal object rather than no content
     }
 
-    return resp.data
+    return resp
     //return new Principal('123456', 'paris');
 
 }
