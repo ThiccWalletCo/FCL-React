@@ -11,8 +11,8 @@ interface IWalletProps{
 }
 
 export default function WalletContents(props:IWalletProps) {
-    
-    let [walletList, updateWalletList] = useState([]);
+    let [currWallet, updateCurrWallet] = useState([]);
+    let [coinList, updateCoinList] = useState([]);
 
     // let pairs:string[] = ['BTC-USD', 'USDT-USD', 'SHIB-USD', 'ADA-USD', 'RGT-USD', 'DOGE-USD']; 
     // let amounts:number[] = [0.001, 200, 4000000, 300, 15, 1000];
@@ -27,9 +27,13 @@ export default function WalletContents(props:IWalletProps) {
 
         if (props.currWallet){
             getWallet(props.currWallet as WalletRequest).then((wallet)=> {
-            if(walletList.length == 0){
-                updateWalletList(wallet);
-                //userWallet = wallet;
+            if(currWallet == undefined){
+                updateCurrWallet(wallet);
+                console.log("++++++++++++fsdfsdfsdfsdffs$#%^%#$^&#%$%#$+++++++++++++++++++");
+                console.log(wallet);
+                console.log(wallet['coins']);
+                console.log("@@#@$@#$%%@%$#$#%#$%#$%");
+                updateCoinList(wallet['coins']);
                 
             } 
         })
@@ -40,7 +44,7 @@ export default function WalletContents(props:IWalletProps) {
     }, []);
 
     console.log("+++++++++++++++++++++++++++++++");
-    console.log(walletList);
+    // console.log(walletList);
     
     let pairs:string[] = [];
     let amounts:number[] = [];
@@ -192,10 +196,36 @@ export default function WalletContents(props:IWalletProps) {
 
 
     return (
-        <div className="App">
-            <h3>Coins in Wallet:</h3>
-            <div id="display"></div>
-        </div>
+        // <div className="App">
+        //     <h3>Wallet</h3>
+        //     <div id="display"></div>
+        //     <h3>Coins in Wallet</h3>
+        // </div>
+        <>
+        <h1><u>COINS IN WALLET:</u></h1>
+    
+        <table className="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Creator</th>
+                    <th>Initial Balance</th>
+                    <th> Action </th>
+                 </tr>
+            </thead>
+            <tbody>
+                {coinList && coinList.map(coin =>
+                    <tr key={coin["currPair"]}>
+                        {/* <td><Link to={league['leagueName']} onClick={updateCurrLeague}> {league["leagueName"]}</Link></td> */}
+                        {/* <td><Link to={'/leaderboard'} onClick={updateCurrLeague}> {league["leagueName"]}</Link></td>
+                        <td>{league["creatorName"]}</td>
+                        <td>{league["initialBal"]}</td>
+                        <td><Link to={league['leagueName']} onClick={updateCurrLeague}> View </Link></td> */}
+                    </tr>
+                    )}
+            </tbody>
+        </table>
+        </>
         );
 }    
     
