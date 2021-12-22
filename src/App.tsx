@@ -34,7 +34,7 @@ function App() {
 
           <Route path="leagues/d" element={<LeaderboardList/>}/>
 
-          <Route path="/login" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
+          <Route path="/" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
           <Route path="/dashboard" element={<DashboardComponent currentUser={authUser}/>}/>
           <Route path="/price" element={<PriceComponent/>}/>
           <Route path="/leagues" element={<LeaguesList/>}/>
