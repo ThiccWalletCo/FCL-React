@@ -21,8 +21,8 @@ import LeaderboardList from './components/LeaderboardComponent';
 function App() {
 
   let [authUser, setAuthUser] = useState(undefined as Principal | undefined);
-  let [currLeague, setCurrLeague] = useState(undefined as League | undefined);
-
+  let [currLeague, setCurrLeague] = useState("");  //(undefined as League | undefined);
+  
 
   return (
  
@@ -32,12 +32,12 @@ function App() {
 
           {/* {heroes.map(hero => (<Link to={'heroes/' + hero.id} />)} */}
 
-          <Route path="leagues/d" element={<LeaderboardList/>}/>
+          <Route path="/leaderboard" element={<LeaderboardList leagueName={currLeague}/>}/>
 
           <Route path="/login" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
           <Route path="/dashboard" element={<DashboardComponent currentUser={authUser}/>}/>
           <Route path="/price" element={<PriceComponent/>}/>
-          <Route path="/leagues" element={<LeaguesList/>}/>
+          <Route path="/leagues" element={<LeaguesList setLeague={setCurrLeague}/>}/>
           <Route path="/register" element={<RegistrationComp/>}/>
           <Route path="/createLeague" element={<CreateLeagueComponent/>} />
           {/* <Route path="/leaderboard" element={<LeaderboardList/>}/> */}

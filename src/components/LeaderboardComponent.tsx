@@ -5,17 +5,19 @@ import League from "../components/LeagueComponent";
 import { getLeagues } from '../remote/league-service';
 import { reqParamQuery } from "../remote/request-param-data";
 
-export default function LeaderboardList() {
+// ILeaderboardProps
+
+export default function LeaderboardList({leagueName}:{leagueName: string}) {
     let [playerList, updatePlayerList] = useState([]);
     
     useEffect( () => {
         console.log(playerList);
-        reqParamQuery('leaderboard/league=', "d").then((players) => {
+        reqParamQuery('leaderboard/league=', leagueName).then((players) => {
             if (playerList.length == 0) updatePlayerList(players);
             console.log(players);
         });
        
-    });
+    }, []);
 
     // function checkUsernameAvailability() {
     //     if (username) {
