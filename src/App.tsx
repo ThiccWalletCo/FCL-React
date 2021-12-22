@@ -17,6 +17,7 @@ import { CreateLeagueComponent } from './components/CreateLeagueComponent'
 import { League } from './models/League';
 import LeaguesList from './containers/LeaguesContainer';
 import LeaderboardList from './components/LeaderboardComponent';
+import MyLeaguesComponent from './components/MyLeaguesComponent';
 
 function App() {
 
@@ -30,8 +31,6 @@ function App() {
       <NavComponent/>
       <Routes>
 
-          {/* {heroes.map(hero => (<Link to={'heroes/' + hero.id} />)} */}
-
           <Route path="/leaderboard" element={<LeaderboardList leagueName={currLeague}/>}/>
 
           <Route path="/" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
@@ -41,6 +40,7 @@ function App() {
           <Route path="/leagues" element={<LeaguesList setLeague={setCurrLeague}/>}/>
           <Route path="/register" element={<RegistrationComp/>}/>
           <Route path="/createLeague" element={<CreateLeagueComponent/>} />
+          <Route path="/my_leagues" element={<MyLeaguesComponent currentUser={authUser} />} />
           {/* <Route path="/leaderboard" element={<LeaderboardList/>}/> */}
           {/* {LeaguesList.map(league => (<Link to={'leagues/'+ league.leagueName} />))} */}
       </Routes>
