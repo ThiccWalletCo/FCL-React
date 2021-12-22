@@ -5,6 +5,7 @@ import { json } from 'stream/consumers';
 import { getWallet } from '../remote/get-wallet-service';
 import { WalletRequest } from '../models/WalletRequest';
 import { Principal } from '../models/Principal';
+import { TransactionComponent } from './TransactionComponent';
 
 interface IWalletProps{
     currWallet: WalletRequest | undefined,
@@ -204,6 +205,7 @@ export default function WalletContents(props:IWalletProps) {
         //     <h3>Coins in Wallet</h3>
         // </div>
         <>
+        {(props.currUser?.username == props.currWallet?.username) && <TransactionComponent/>}
         <h1><u>COINS IN WALLET:</u></h1>
     
         <table className="table table-striped table-bordered">
@@ -227,6 +229,12 @@ export default function WalletContents(props:IWalletProps) {
                     )}
             </tbody>
         </table>
+        
+        {/* <div className="App">
+            {(props.currUser?.username == props.currWallet?.username) && <TransactionComponent/>}
+            <h3>Coins in Wallet:</h3>
+            <div id="display"></div>
+        </div> */}
         </>
         );
 }    
