@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import { json } from 'stream/consumers';
 import { getWallet } from '../remote/get-wallet-service';
 import { WalletRequest } from '../models/WalletRequest';
+import { Principal } from '../models/Principal';
 
 interface IWalletProps{
     currWallet: WalletRequest | undefined,
+    currUser: Principal | undefined
     // setCurrWallet: (nextWallet: WalletRequest | undefined) => void
 }
 
