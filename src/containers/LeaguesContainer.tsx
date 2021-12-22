@@ -2,6 +2,8 @@ import {useState, useEffect} from "react";
 import { Link, Navigate } from "react-router-dom";
 
 import League from "../components/LeagueComponent";
+import { WalletRequest } from "../models/WalletRequest";
+import { WalletResponse } from "../models/WalletResponse";
 import { getLeagues } from '../remote/league-service';
 
 export default function LeaguesList({setLeague}:any) {
@@ -9,6 +11,10 @@ export default function LeaguesList({setLeague}:any) {
 
     function updateCurrLeague(e:any){
         console.log( e.target.innerText);
+        console.log(e);
+        console.log('1111111111111111111111111111');
+        //console.log(e.target);
+        localStorage.getItem("username");
         setLeague(e.target.innerText);
     }
     

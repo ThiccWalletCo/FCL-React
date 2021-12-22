@@ -1,4 +1,4 @@
-function League(league:any) {
+function LeagueComponent(league:any) {
     return (<>
         <li>
             {console.log(JSON.stringify(league["league"]["leagueName"]))}
@@ -7,4 +7,4 @@ function League(league:any) {
     </>)
 }
 
-export default League;
+export default LeagueComponent;
