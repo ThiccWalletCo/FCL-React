@@ -4,7 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import { League } from "../models/League";
 import { WalletRequest } from "../models/WalletRequest";
 import { WalletResponse } from "../models/WalletResponse";
-import { getLeagues } from '../remote/league-service';
+import { getLeagues, joinLeague } from '../remote/league-service';
 import { selectLeague } from "../remote/select-league-service";
 
 export default function LeaguesList({setLeague}:any) {
@@ -18,6 +18,11 @@ export default function LeaguesList({setLeague}:any) {
         localStorage.getItem("username");
         setLeague(e.target.innerText);
         selectLeague(e.target.innerText);
+    }
+
+    function joinLeagueOnClick(e:any) {
+        let leagueName = e.target.parentNode.previousSibling.previousSibling.previousSibling.innerText;
+        joinLeague(leagueName);
     }
     
     useEffect( () => {
@@ -52,7 +57,7 @@ export default function LeaguesList({setLeague}:any) {
                         <td><Link to={'/leaderboard'} onClick={updateCurrLeague}> {league["leagueName"]}</Link></td>
                         <td>{league["creatorName"]}</td>
                         <td>{league["initialBal"]}</td>
-                        <td><Link to={league['leagueName']} onClick={updateCurrLeague}> Join </Link></td>
+                        <td><Link to={'/leagues'} onClick={joinLeagueOnClick}> Join </Link></td>
                     </tr>
                     )}
             </tbody>

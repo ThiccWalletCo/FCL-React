@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useState, useEffect } from 'react';
 import {Navigate} from 'react-router-dom';
 import { Button, Container, Form } from 'react-bootstrap';
 
@@ -6,6 +6,7 @@ import {Principal} from '../models/Principal';
 import { authenticate } from '../remote/auth-service';
 import { CreateTransactionRequest } from '../models/CreateTransactionRequest';
 import { submitPurchase, submitSale } from '../remote/transaction-service';
+import { getCoinPairs } from '../remote/coin-pair-service';
 
     /**
      * 1) BUY/SELL  toggle switch or dropdown
@@ -17,6 +18,7 @@ import { submitPurchase, submitSale } from '../remote/transaction-service';
 export function TransactionComponent() {
     let [coinPair, setCoinPair] = useState('');
     let [amount, setAmount] = useState(0);
+    let [coinPairList, setCoinPairList] = useState([] as string[]);
 
     let [invalidCoinPair, displayInvalidCoinPair] = useState(false);
     let [invalidAmount, displayInvalidAmount] = useState(false);
@@ -30,6 +32,12 @@ export function TransactionComponent() {
     let updateAmount = (e: SyntheticEvent) => {
         setAmount(Number((e.target as HTMLInputElement).value));
     }
+
+    useEffect( () => {
+        getCoinPairs().then(response => {
+            setCoinPairList(response.data);
+        });
+    }, []);
 
     //--------------------------------//
 
@@ -86,10 +94,19 @@ export function TransactionComponent() {
                 />
             </div>
 
-            <Form.Group>
+            {/* <Form.Group>
                 <Form.Label className="mb-3" id="coinPairField">Coin Pair:</Form.Label>
                 <Form.Control type="text" placeholder="BTC-USD" onChange={updateCoinPair} onBlur={checkCoinPairValidity}/> 
-            </Form.Group>
+            </Form.Group> */}
+
+            <input list="currPairs" name="currPair" onChange={updateCoinPair} />
+                <datalist id="currPairs">
+                    {
+                        coinPairList.map(pair => 
+                            <option value={pair} key={pair} />
+                        )
+                    }
+                </datalist>
             {invalidCoinPair && <div className="alert alert-danger" id="invalidCoinPairAlert">Coin Pair is invalid!</div>}
             
             <Form.Group>
