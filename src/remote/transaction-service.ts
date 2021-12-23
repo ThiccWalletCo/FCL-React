@@ -9,6 +9,7 @@ export const submitPurchase = async (request: CreateTransactionRequest): Promise
         res = true;
     }).catch((error) => {
         console.log(error);
+        alert(error);
     });
 
     return new Promise(resolve => {
@@ -24,6 +25,7 @@ export const submitSale = async (request: CreateTransactionRequest): Promise<boo
         res = true;
     }).catch((error) => {
         console.log(error);
+        alert(error);
     });
 
     return new Promise(resolve => {
