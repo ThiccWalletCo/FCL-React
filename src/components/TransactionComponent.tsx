@@ -19,6 +19,7 @@ export function TransactionComponent() {
     let [coinPair, setCoinPair] = useState('');
     let [amount, setAmount] = useState(0);
     let [coinPairList, setCoinPairList] = useState([] as string[]);
+    let [redirectNow, setRedirectNow] = useState(false);
 
     let [invalidCoinPair, displayInvalidCoinPair] = useState(false);
     let [invalidAmount, displayInvalidAmount] = useState(false);
@@ -64,11 +65,11 @@ export function TransactionComponent() {
             let selectedOption = document.querySelector("input[type='radio']:checked")
             if (selectedOption?.id === 'buy-radio') {
                 submitPurchase(reqBody).then(bool => {
-
+                    setRedirectNow(true);
                 })
             } else if (selectedOption?.id === 'sell-radio') {
                 submitSale(reqBody).then(bool => {
-                    
+                    setRedirectNow(true);
                 })
             }
         }
@@ -78,6 +79,7 @@ export function TransactionComponent() {
         <Container>
 
             <h4>You tryna trade some coin?</h4>
+            {redirectNow && <Navigate to="/transactionSuccess" />}
             {/* TODO - Toggle between BUY and SELL */}
             <div key={`default-radio`} className="mb-3">
                 <Form.Check 

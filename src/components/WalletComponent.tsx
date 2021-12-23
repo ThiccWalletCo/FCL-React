@@ -18,6 +18,7 @@ export default function WalletContents(props:IWalletProps) {
     let [currWallet, updateCurrWallet] = useState({});
     let [coinList, updateCoinList] = useState([]);
     let [walletCoinList, updateWalletCoinList] = useState([] as CoinWallet[])
+    
 
     let pairs:string[] = [];//['BTC-USD', 'ETH-USD']; 
     let amounts:number[] = [];//[0.001, 2];
@@ -34,12 +35,14 @@ export default function WalletContents(props:IWalletProps) {
             let firsts:boolean[] = [];
 
     useEffect( () => {
+            console.log("CURRENT WALLET @@@@@");
             console.log(props.currWallet);
 
         if (props.currWallet){
             getWallet(props.currWallet as WalletRequest).then((wallet)=> {
             if(coinList.length == 0){
-
+                
+                console.log("SDFSDFSFSFSDFSDFSDFSDFDSFSDFFS");
                 currWallet = wallet;
                 coinList = wallet['coins'];
                 updateCurrWallet(currWallet); // doesn't update currwallet
@@ -49,8 +52,8 @@ export default function WalletContents(props:IWalletProps) {
             
             pairs = coinList.map( coin => coin['currPair']);
             amounts = coinList.map( coin => coin['amount']);
-            console.log(pairs);
-            console.log(amounts);
+            // console.log(pairs);
+            // console.log(amounts);
             sock();
         })
 
