@@ -38,7 +38,6 @@ export default function MyLeaguesComponent(props:IMyLeaugeProps) {
                     <th>Name</th>
                     <th>Creator</th>
                     <th>Initial Balance</th>
-                    <th> Action </th>
                  </tr>
             </thead>
             <tbody>
@@ -48,7 +47,6 @@ export default function MyLeaguesComponent(props:IMyLeaugeProps) {
                         <td><Link to={'/leaderboard'} onClick={updateCurrLeague}> {league["leagueName"]}</Link></td>
                         <td>{league["creatorName"]}</td>
                         <td>{league["initialBal"]}</td>
-                        <td><Link to={'/leaderboard'} onClick={updateCurrLeague}> View </Link></td>
                     </tr>
                     )}
             </tbody>
