@@ -48,7 +48,7 @@ export default function MyLeaguesComponent(props:IMyLeaugeProps) {
                         <td><Link to={'/leaderboard'} onClick={updateCurrLeague}> {league["leagueName"]}</Link></td>
                         <td>{league["creatorName"]}</td>
                         <td>{league["initialBal"]}</td>
-                        <td><Link to={league['leagueName']} onClick={updateCurrLeague}> View </Link></td>
+                        <td><Link to={'/leaderboard'} onClick={updateCurrLeague}> View </Link></td>
                     </tr>
                     )}
             </tbody>
