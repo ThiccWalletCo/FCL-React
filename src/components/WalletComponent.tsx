@@ -35,8 +35,7 @@ export default function WalletContents(props:IWalletProps) {
     let firsts:boolean[] = [];
 
     useEffect( () => {
-            console.log("CURRENT WALLET @@@@@");
-            console.log(props.currWallet);
+
         console.log(props.currWallet);
         let socket: WebSocket;
 
