@@ -31,10 +31,11 @@ export default function WalletContents(props:IWalletProps) {
         if (props.currWallet){
             getWallet(props.currWallet as WalletRequest).then((wallet)=> {
             if(coinList.length == 0){
-                // updateCurrWallet(wallet); // doesn't update currwallet
-                // updateCoinList(wallet['coins']);
+
                 currWallet = wallet;
                 coinList = wallet['coins'];
+                updateCurrWallet(currWallet); // doesn't update currwallet
+                updateCoinList(coinList);
                 
             }
             
@@ -167,40 +168,7 @@ export default function WalletContents(props:IWalletProps) {
         return response;
     }
 
-
-    // return (<>
-    //     <h1><u>THICC WALLETS</u></h1>
-
-    //     <table className="table table-striped table-bordered">
-    //         <thead>
-    //             <tr>
-    //                 <th>Name</th>
-    //                 <th>Balance</th>
-    //              </tr>
-    //         </thead>
-    //         <tbody>
-    //             {playerList && playerList.map(player =>
-                    
-    //                 <tr key={player['username']}>
-    //                     <td><Link to={player['username']}> {player['username']}</Link></td>
-    //                     <td>{player['balance']}</td>
-    //                     {/* <td><Link to={league['leagueName']}> Join </Link></td> */}
-    //                     {console.log(player)}
-    //                 </tr>
-                    
-    //                 )}
-    //         </tbody>
-    //     </table>
-    // </>)
-    
-
-
     return (
-        // <div className="App">
-        //     <h3>Wallet</h3>
-        //     <div id="display"></div>
-        //     <h3>Coins in Wallet</h3>
-        // </div>
         <>
         {(props.currUser?.username == props.currWallet?.username) && <TransactionComponent/>}
         <h1><u>COINS IN WALLET:</u></h1>
@@ -208,27 +176,23 @@ export default function WalletContents(props:IWalletProps) {
         <table className="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Creator</th>
-                    <th>Initial Balance</th>
-                    <th> Action </th>
+                    <th>Currency Pair</th>
+                    <th>Amount</th>
                  </tr>
             </thead>
             <tbody>
                 {coinList && coinList.map(coin =>
                     <tr key={coin["currPair"]}>
-                        {/* <td><Link to={league['leagueName']} onClick={updateCurrLeague}> {league["leagueName"]}</Link></td> */}
-                        {/* <td><Link to={'/leaderboard'} onClick={updateCurrLeague}> {league["leagueName"]}</Link></td>
-                        <td>{league["creatorName"]}</td>
-                        <td>{league["initialBal"]}</td>
-                        <td><Link to={league['leagueName']} onClick={updateCurrLeague}> View </Link></td> */}
-                    </tr>
+                        <td>{coin["currPair"]}</td>
+                        <td>{coin["amount"]}</td>
+                    </tr>,
+                    
                     )}
             </tbody>
         </table>
         
-        <div className="App">
-            {(props.currUser?.username == props.currWallet?.username) && <TransactionComponent/>}
+        <div>
+            {socket.onmessage}
             <h3>Coins in Wallet:</h3>
             <div id="display"></div>
         </div>
