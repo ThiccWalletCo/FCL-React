@@ -6,6 +6,7 @@ import { getWallet } from '../remote/get-wallet-service';
 import { WalletRequest } from '../models/WalletRequest';
 import { Principal } from '../models/Principal';
 import { TransactionComponent } from './TransactionComponent';
+import CoinWallet from '../models/CoinWallet'
 
 interface IWalletProps{
     currWallet: WalletRequest | undefined,
@@ -16,10 +17,14 @@ interface IWalletProps{
 export default function WalletContents(props:IWalletProps) {
     let [currWallet, updateCurrWallet] = useState({});
     let [coinList, updateCoinList] = useState([]);
+    let [walletCoinList, updateWalletCoinList] = useState([] as CoinWallet[])
 
     let pairs:string[] = [];//['BTC-USD', 'ETH-USD']; 
     let amounts:number[] = [];//[0.001, 2];
-    let numIterations:number = 1500;
+    let numIterations:number = 1000;
+    let totalNumIterations = numIterations;
+    let count = numIterations - 5;
+    let tempWalletCoinList: CoinWallet[];
 
     //var userWallet;
 
@@ -94,6 +99,7 @@ export default function WalletContents(props:IWalletProps) {
         let counts:number[] = [];
         let firsts:boolean[] = [];
 
+
         for(let i = 0; i < pairs.length; i++){
             averages[i] = 0;
             counts[i] = 0;
@@ -111,7 +117,18 @@ export default function WalletContents(props:IWalletProps) {
 
         socket.onmessage = function(event) {
             let jsonObj = JSON.parse(event.data);
-            getAvgPrices(jsonObj);
+            storeAvgPrices(jsonObj);
+            if (count > totalNumIterations) {
+                count = 0;
+                for (let i = 0; i < averages.length; i++) {
+                    tempWalletCoinList[i] = new CoinWallet(pairs[i], amounts[i], averages[i]);
+                    console.log(tempWalletCoinList[i]);
+                }
+                updateWalletCoinList(tempWalletCoinList);
+                console.log(tempWalletCoinList)
+                console.log('Should update table if Im here')
+            }
+            count++;
 
         };
 
@@ -126,7 +143,8 @@ export default function WalletContents(props:IWalletProps) {
             console.log(`[error] ${error}`);
         };
 
-        function getAvgPrices (jsonObj: any) {
+        function storeAvgPrices (jsonObj: any) {
+            tempWalletCoinList = [];
             if(jsonObj["type"] === "l2update"){
                 for(let i = 0; i < pairs.length; i++){
                     if(jsonObj["product_id"]===pairs[i]){
@@ -144,14 +162,17 @@ export default function WalletContents(props:IWalletProps) {
                             let num = averages[i] * amounts[i];//calculate how much league user has
                             averages[i] = Math.round((num+Number.EPSILON)*100)/100;//round to hundrendth decimal place
                             //response.push({pair:pairs[i], price: averages[i]})
-                            document.getElementById("display")!.innerHTML = pairs[0] + ": $"+averages[0].toString();//response[2].price.toString();
-                            for(let k = 1; k < pairs.length; k++){
-                                const para = document.createElement("p");//!.innerHTML = averages[1].toString();
-                                const node = document.createTextNode(pairs[k]+": $"+averages[k].toString());
-                                para.append(node);
-                                const element = document.getElementById("display");
-                                element?.appendChild(para);
-                            }
+                            // document.getElementById("display")!.innerHTML = pairs[0] + ": $"+averages[0].toString();//response[2].price.toString();
+                            // for(let k = 1; k < pairs.length; k++){
+                            //     const para = document.createElement("p");//!.innerHTML = averages[1].toString();
+                            //     const node = document.createTextNode(pairs[k]+": $"+averages[k].toString());
+                            //     para.append(node);
+                            //     const element = document.getElementById("display");
+                            //     element?.appendChild(para);
+                            // }
+                            
+                            
+                            
                             
                         }
                         counts[i] = 0;
@@ -163,6 +184,8 @@ export default function WalletContents(props:IWalletProps) {
                         counts[i]++;        
                     }
                 }
+                
+                
             }
 
             return response;
@@ -180,25 +203,28 @@ export default function WalletContents(props:IWalletProps) {
                 <tr>
                     <th>Currency Pair</th>
                     <th>Amount</th>
+                    <th>Current Value</th>
                  </tr>
             </thead>
             <tbody>
-                {coinList && coinList.map(coin =>
+                {walletCoinList && walletCoinList.map(coin =>
                     <tr key={coin["currPair"]}>
                         <td>{coin["currPair"]}</td>
                         <td>{coin["amount"]}</td>
+                        <td>${coin["usdValue"]}</td>
                     </tr>,
                     
                     )}
             </tbody>
         </table>
         
-        <div>
-            {/* {socket.onmessage} */}
-            <h3>Coins in Wallet:</h3>
-            <div id="display"></div>
-        </div>
+        
         </>
         );
+        // <div>
+        //     {/* {socket.onmessage} */}
+        //     <h3>Coins in Wallet:</h3>
+        //     <div id="display"></div>
+        // </div>
 }    
     
