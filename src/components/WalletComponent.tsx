@@ -11,7 +11,6 @@ import CoinWallet from '../models/CoinWallet'
 interface IWalletProps{
     currWallet: WalletRequest | undefined,
     currUser: Principal | undefined
-    // setCurrWallet: (nextWallet: WalletRequest | undefined) => void
 }
 
 export default function WalletContents(props:IWalletProps) {
@@ -23,14 +22,11 @@ export default function WalletContents(props:IWalletProps) {
     let amounts:number[] = [];//[0.001, 2];
     let numIterations:number = 1000;
     let totalNumIterations = numIterations;
-    let count = numIterations - 5;
+    let count = numIterations;
+    let first = true;
     let tempWalletCoinList: CoinWallet[];
 
-    //var userWallet;
-
     useEffect( () => {
-            // let currWallet = new WalletRequest(username, leagueName);
-        //reqParamQuery('leaderboard/league=', "d").then((players) => {
             console.log(props.currWallet);
 
         if (props.currWallet){
@@ -56,13 +52,9 @@ export default function WalletContents(props:IWalletProps) {
        
     }, []);
 
-    // for(let i in walletList){
-    //     pairs.push(i);
-    //     amounts.push(i);
-    // }
-
     function sock() {
         let socket = new WebSocket("wss://ws-feed.exchange.coinbase.com/");
+
 
 
         let request: {type: string, 
@@ -117,16 +109,23 @@ export default function WalletContents(props:IWalletProps) {
 
         socket.onmessage = function(event) {
             let jsonObj = JSON.parse(event.data);
+
+
+
             storeAvgPrices(jsonObj);
-            if (count > totalNumIterations) {
+            
+            if (count > totalNumIterations || first) {
                 count = 0;
+                if(first) {
+                    console.log(averages[0])
+                }
+                first = false;
                 for (let i = 0; i < averages.length; i++) {
                     tempWalletCoinList[i] = new CoinWallet(pairs[i], amounts[i], averages[i]);
                     console.log(tempWalletCoinList[i]);
                 }
                 updateWalletCoinList(tempWalletCoinList);
                 console.log(tempWalletCoinList)
-                console.log('Should update table if Im here')
             }
             count++;
 
@@ -153,31 +152,20 @@ export default function WalletContents(props:IWalletProps) {
                     else if(counts[i]>numIterations || firsts[i]){
 
                         if(firsts[i]){
+                            first = true;
                             sums[i] = prices[i];
                             counts[i] = 1;
+                            console.log(sums[i]);
+                            console.log(counts[i]);
                         }
                         averages[i] = sums[i]/counts[i];
                         if(!isNaN(averages[i])){
                             firsts[i] = false;
                             let num = averages[i] * amounts[i];//calculate how much league user has
-                            averages[i] = Math.round((num+Number.EPSILON)*100)/100;//round to hundrendth decimal place
-                            //response.push({pair:pairs[i], price: averages[i]})
-                            // document.getElementById("display")!.innerHTML = pairs[0] + ": $"+averages[0].toString();//response[2].price.toString();
-                            // for(let k = 1; k < pairs.length; k++){
-                            //     const para = document.createElement("p");//!.innerHTML = averages[1].toString();
-                            //     const node = document.createTextNode(pairs[k]+": $"+averages[k].toString());
-                            //     para.append(node);
-                            //     const element = document.getElementById("display");
-                            //     element?.appendChild(para);
-                            // }
-                            
-                            
-                            
-                            
+                            averages[i] = Math.round((num+Number.EPSILON)*100)/100;//round to hundrendth decimal place                    
                         }
                         counts[i] = 0;
                         sums[i] = 0;
-                        //averages[i] = 0;
                     }
                     else {
                         sums[i] += prices[i]; 
@@ -221,10 +209,5 @@ export default function WalletContents(props:IWalletProps) {
         
         </>
         );
-        // <div>
-        //     {/* {socket.onmessage} */}
-        //     <h3>Coins in Wallet:</h3>
-        //     <div id="display"></div>
-        // </div>
 }    
     
