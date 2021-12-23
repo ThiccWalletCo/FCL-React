@@ -20,6 +20,7 @@ import LeaderboardList from './components/LeaderboardComponent';
 import { WalletRequest } from './models/WalletRequest';
 import  WalletContents  from './components/WalletComponent';
 import MyLeaguesComponent from './components/MyLeaguesComponent';
+import TransactionSuccessComponent from './components/TransactionSuccessComponet';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
           <Route path="/my_leagues" element={<MyLeaguesComponent currentUser={authUser} setLeague={setCurrLeague} />} />
           <Route path="/leaderboard" element={<LeaderboardList leagueName={currLeague} setCurrWallet={setAuthWallet}/>}/>
           <Route path="/wallet" element={<WalletContents currWallet={authWallet} currUser={authUser}/> } /> 
+          <Route path="/transactionSuccess" element={<TransactionSuccessComponent/>} />
           {/* <Route path="/leaderboard" element={<LeaderboardList/>}/> */}
           {/* {LeaguesList.map(league => (<Link to={'leagues/'+ league.leagueName} />))} */}
       </Routes>
