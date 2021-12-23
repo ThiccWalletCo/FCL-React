@@ -3,19 +3,30 @@ import { Link, Navigate } from "react-router-dom";
 import { Principal } from "../models/Principal";
 
 import { reqParamQuery } from "../remote/request-param-data";
+import { selectLeague } from "../remote/select-league-service";
 
-export default function MyLeaguesComponent({currentUser}:any, {setLeague}:any) {
+interface IMyLeaugeProps {
+    currentUser: Principal | undefined,
+    setLeague: (nextLeague: string) => void
+}
+export default function MyLeaguesComponent(props:IMyLeaugeProps) {
     let [leagueList, updateLeagueList] = useState([]);
 
     function updateCurrLeague(e:any){
         console.log( e.target.innerText);
-        setLeague(e.target.innerText);
+        props.setLeague(e.target.innerText);
+        selectLeague(e.target.innerText).then((res) => {
+            console.log("~~~~ FLAG MyLeaguesComponent L.19 ~~~~")
+            console.log(res)
+        })
     }
     
     useEffect( () => {
-        reqParamQuery("/league/user=", currentUser.id).then((leagues) => {
-            if (leagueList.length == 0) updateLeagueList(leagues);
-        });
+        if (props.currentUser){
+            reqParamQuery("/league/user=", props.currentUser.id).then((leagues) => {
+                if (leagueList.length == 0) updateLeagueList(leagues);
+            });
+        }
     });
 
     return (<>

@@ -17,11 +17,16 @@ import { CreateLeagueComponent } from './components/CreateLeagueComponent'
 import { League } from './models/League';
 import LeaguesList from './containers/LeaguesContainer';
 import LeaderboardList from './components/LeaderboardComponent';
+import { WalletRequest } from './models/WalletRequest';
+import  WalletContents  from './components/WalletComponent';
 import MyLeaguesComponent from './components/MyLeaguesComponent';
 
 function App() {
 
   let [authUser, setAuthUser] = useState(undefined as Principal | undefined);
+  let [authWallet, setAuthWallet] = useState(undefined as WalletRequest | undefined);
+  // let [username, setUsername] = useState("");
+  // let [leagueName, setLeagueName] = useState("");
   let [currLeague, setCurrLeague] = useState("");  //(undefined as League | undefined);
   
 
@@ -30,17 +35,18 @@ function App() {
     <div className="App">
       <NavComponent/>
       <Routes>
-
-          <Route path="/leaderboard" element={<LeaderboardList leagueName={currLeague}/>}/>
+          
 
           <Route path="/" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
           <Route path="/login" element={<LoginComponent currentUser={authUser} setCurrentUser={setAuthUser} />} />
           <Route path="/dashboard" element={<DashboardComponent currentUser={authUser}/>}/>
-          <Route path="/price" element={<PriceComponent/>}/>
-          <Route path="/leagues" element={<LeaguesList setLeague={setCurrLeague}/>}/>
+          {/* <Route path="/price" element={<PriceComponent currWallet={authWallet} setCurrWallet={setAuthWallet}/>}/> */}
+          <Route path="/leagues" element={<LeaguesList setLeague={setCurrLeague} /> }/>
           <Route path="/register" element={<RegistrationComp/>}/>
           <Route path="/createLeague" element={<CreateLeagueComponent/>} />
-          <Route path="/my_leagues" element={<MyLeaguesComponent currentUser={authUser} />} />
+          <Route path="/my_leagues" element={<MyLeaguesComponent currentUser={authUser} setLeague={setCurrLeague} />} />
+          <Route path="/leaderboard" element={<LeaderboardList leagueName={currLeague} setCurrWallet={setAuthWallet}/>}/>
+          <Route path="/wallet" element={<WalletContents currWallet={authWallet} currUser={authUser}/> } /> 
           {/* <Route path="/leaderboard" element={<LeaderboardList/>}/> */}
           {/* {LeaguesList.map(league => (<Link to={'leagues/'+ league.leagueName} />))} */}
       </Routes>

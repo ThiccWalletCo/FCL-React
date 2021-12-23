@@ -1,4 +1,5 @@
 import { appClient } from "./app-client"
+import createAuthClient from "./app-auth";
 
 export const getLeagues =async () => {
     let resp = await appClient.get('/league');
@@ -12,4 +13,12 @@ export const getLeagues =async () => {
         console.log('successfully retrieved data');
     }
     return resp.data;
+}
+
+export const joinLeague = async (leagueName:string) => {
+    let appClient = await createAuthClient();
+
+    appClient.post(`/wallet/${leagueName}`).then( () => {
+        alert(`Congratulations, you are now a member of ${leagueName}!`)
+    })
 }
