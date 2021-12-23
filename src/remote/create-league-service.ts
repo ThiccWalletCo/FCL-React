@@ -9,6 +9,7 @@ export const createLeague = async (credentials: CreateLeagueRequest): Promise<bo
         resp = true;
     }).catch((error) => {
         console.log(error);
+        alert(error);
     });
     
     return new Promise(resolve => {
