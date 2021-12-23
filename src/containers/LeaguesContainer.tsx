@@ -1,13 +1,13 @@
 import {useState, useEffect} from "react";
 import { Link, Navigate } from "react-router-dom";
 
-import League from "../components/LeagueComponent";
+import {League} from "../models/League"
 import { WalletRequest } from "../models/WalletRequest";
 import { WalletResponse } from "../models/WalletResponse";
 import { getLeagues } from '../remote/league-service';
 
 export default function LeaguesList({setLeague}:any) {
-    let [leagueList, updateLeagueList] = useState([]);
+    let [leagueList, updateLeagueList] = useState([]as League[]);
 
     function updateCurrLeague(e:any){
         console.log( e.target.innerText);
