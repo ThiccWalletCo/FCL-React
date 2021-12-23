@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { Principal } from "../models/Principal";
 
 import { reqParamQuery } from "../remote/request-param-data";
+import { selectLeague } from "../remote/select-league-service";
 
 interface IMyLeaugeProps {
     currentUser: Principal | undefined,
@@ -14,6 +15,10 @@ export default function MyLeaguesComponent(props:IMyLeaugeProps) {
     function updateCurrLeague(e:any){
         console.log( e.target.innerText);
         props.setLeague(e.target.innerText);
+        selectLeague(e.target.innerText).then((res) => {
+            console.log("~~~~ FLAG MyLeaguesComponent L.19 ~~~~")
+            console.log(res)
+        })
     }
     
     useEffect( () => {

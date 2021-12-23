@@ -5,6 +5,7 @@ import League from "../components/LeagueComponent";
 import { WalletRequest } from "../models/WalletRequest";
 import { WalletResponse } from "../models/WalletResponse";
 import { getLeagues } from '../remote/league-service';
+import { selectLeague } from "../remote/select-league-service";
 
 export default function LeaguesList({setLeague}:any) {
     let [leagueList, updateLeagueList] = useState([]);
@@ -16,6 +17,7 @@ export default function LeaguesList({setLeague}:any) {
         //console.log(e.target);
         localStorage.getItem("username");
         setLeague(e.target.innerText);
+        selectLeague(e.target.innerText);
     }
     
     useEffect( () => {
