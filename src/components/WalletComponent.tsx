@@ -28,13 +28,14 @@ export default function WalletContents(props:IWalletProps) {
     let tempWalletCoinList: CoinWallet[];
 
     let prices:number[] = []; 
-            let averages:number[] = [];
-            let sums:number[] = [];
-            let counts:number[] = [];
-            let firsts:boolean[] = [];
+    let averages:number[] = [];
+    let sums:number[] = [];
+    let counts:number[] = [];
+    let firsts:boolean[] = [];
 
     useEffect( () => {
-            console.log(props.currWallet);
+        console.log(props.currWallet);
+        let socket: WebSocket;
 
         if (props.currWallet){
             getWallet(props.currWallet as WalletRequest).then((wallet)=> {
@@ -57,11 +58,10 @@ export default function WalletContents(props:IWalletProps) {
            
         }
        
-    
-        let socket = new WebSocket("wss://ws-feed.exchange.coinbase.com/");
+ 
         function sock() {
             
-
+            socket = new WebSocket("wss://ws-feed.exchange.coinbase.com/");
 
 
             let request: {type: string, 
