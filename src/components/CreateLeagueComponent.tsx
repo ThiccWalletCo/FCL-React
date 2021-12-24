@@ -31,7 +31,7 @@ export function CreateLeagueComponent() {
 
     function checkLeagueNameAvailability() {
         if (leagueName) {
-            requestParamQuery(`/league/name?name=`, leagueName).then((bool) => {
+            requestParamQuery(`/league/name?name=`, leagueName.trim()).then((bool) => {
                 displayLeagueNameTaken(bool);
             });
         }
@@ -51,7 +51,7 @@ export function CreateLeagueComponent() {
 
     function sendLeagueCreationRequest() {
         if(!leagueNameTaken && !(leagueName === '') && (Number(initialBal) > 1)) {
-            let reqBody: CreateLeagueRequest = new CreateLeagueRequest(leagueName, Number(initialBal));
+            let reqBody: CreateLeagueRequest = new CreateLeagueRequest(leagueName.trim(), Number(initialBal));
 
             createLeague(reqBody).then((bool) => {
                 setNavigateOut(bool);
