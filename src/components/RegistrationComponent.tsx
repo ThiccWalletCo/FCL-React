@@ -41,7 +41,7 @@ export function RegistrationComp() {
     //--------------------------------------
 
     function checkUsernameAvailability() {
-        if (username) {
+        if (username.trim()) {
             requestParamQuery(`/user/username?username=`, username).then((bool) => {
                 displayUsernameTaken(bool);
             });
@@ -49,7 +49,7 @@ export function RegistrationComp() {
     }
 
     function checkEmailAvailability() {
-        if (email) {
+        if (email.trim()) {
             requestParamQuery(`/user/email?email=`, email).then((bool) => {
                 displayEmailTaken(bool);
             });
@@ -68,8 +68,8 @@ export function RegistrationComp() {
     //----------------------------------------
 
     function sendRegistrationRequest() {
-        if(!usernameTaken && !emailTaken && !nonmatchingPassword && !(username === '') && !(email === '') && !(firstPassword === '')) {
-            let reqBody: CreateUserRequest = new CreateUserRequest(username, email, firstPassword);
+        if(!usernameTaken && !emailTaken && !nonmatchingPassword && !(username.trim() === '') && !(email.trim() === '') && !(firstPassword === '')) {
+            let reqBody: CreateUserRequest = new CreateUserRequest(username.trim(), email.trim(), firstPassword);
 
             createUser(reqBody).then((bool) => {
                 setNavigateOut(bool);
