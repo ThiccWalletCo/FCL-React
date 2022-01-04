@@ -17,3 +17,9 @@ Navigate to root directory of the project and run the commands:
 ### `npm install`
 ### `npm start`
 
+## Technologies Used
+Major frameworks/libraries used for bootstrapping project
+
+* [React TypeScript](https://www.typescriptlang.org/docs/handbook/react.html)
+* [React Bootstrap](https://react-bootstrap.github.io/)
+* [Node.js](https://react-bootstrap.github.io/)
